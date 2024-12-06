@@ -9,13 +9,17 @@ public class TestarVetor {
 
 		Aluno aluno1 = new Aluno("lucas", 7.0);
 		Aluno aluno2 = new Aluno("alice", 7.5);
-		Aluno aluno3 = new Aluno("maria", 5.0);
 
-		Vetor v = new Vetor(3);
+		Vetor<Aluno> v = new Vetor<Aluno>(2);
 		v.inserir(aluno1);
 		v.inserir(aluno2);
-		v.inserir(aluno3);
 
-		//System.out.println(v.);
+		ComparadorMaximo compMax = new ComparadorMaximo();
+		v.setComparadorMaximo(compMax);
+		ComparadorMinimo compMin = new ComparadorMinimo();
+		v.setComparadorMinimo(compMin);
+
+		System.out.println(compMax.compare(aluno1.getMedia(), aluno2.getMedia()));
+		System.out.println(compMin.compare(aluno1.getMedia(), aluno2.getMedia()));
 	}
 }

@@ -40,4 +40,9 @@ public class Aluno implements Comparable<Aluno> {
 		return result;
 	}
 
+	@Override
+	public String toString() {
+		return "Aluno [nome=" + nome + ", media=" + media + "]";
+	}
+
 }

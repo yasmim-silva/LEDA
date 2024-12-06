@@ -24,11 +24,12 @@ public class Vetor<T extends Comparable<T>>{
 	private Comparator comparadorMaximo;
 	private Comparator comparadorMinimo;
 
+	@SuppressWarnings("unchecked")
 	public Vetor(int tamanho) {
 		super();
 		this.tamanho = tamanho;
 		this.indice = -1;
-		this.arrayInterno = (T[]) new Object[tamanho];
+		this.arrayInterno = (T[]) new Comparable[tamanho];
 	}
 
 	private int procurarIndice(T o) {
@@ -113,20 +114,20 @@ public class Vetor<T extends Comparable<T>>{
 	}
 }
 
-class ComparadorMaximo implements Comparator<Aluno> {
+class ComparadorMaximo<E extends Comparable<E>> implements Comparator<E> {
 
 	@Override
-	public int compare(Aluno o1, Aluno o2) {
-		return Double.compare(o1.getMedia(), o2.getMedia());
+	public int compare(E o1, E o2) {
+		return o1.compareTo(o2);
 	}
 
 }
 
-class ComparadorMinimo implements Comparator<Aluno> {
+class ComparadorMinimo<E extends Comparable<E>> implements Comparator<E> {
 
 	@Override
-	public int compare(Aluno o1, Aluno o2) {
-		return Double.compare(o2.getMedia(), o1.getMedia());
+	public int compare(E o1, E o2) {
+		return o2.compareTo(o1);
 	}
 
 }
