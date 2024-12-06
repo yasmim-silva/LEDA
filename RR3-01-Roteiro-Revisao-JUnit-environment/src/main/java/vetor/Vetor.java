@@ -94,7 +94,7 @@ public class Vetor<T extends Comparable<T>>{
 		}
 		T max = this.arrayInterno[0];
 		for (int i = 1; i < this.arrayInterno.length; i++) {
-			if (this.comparadorMaximo.compare(max, this.arrayInterno[i]) < 0) {
+			if (this.arrayInterno[i] != null && this.comparadorMaximo.compare(max, this.arrayInterno[i]) < 0) {
 				max = this.arrayInterno[i];
 			}
 		}
@@ -107,7 +107,7 @@ public class Vetor<T extends Comparable<T>>{
 		}
 		T min = this.arrayInterno[0];
 		for (int i = 1; i < this.arrayInterno.length; i++) {
-			if (this.comparadorMinimo.compare(min, this.arrayInterno[i]) > 0) {
+			if (this.arrayInterno[i] != null && this.comparadorMinimo.compare(min, this.arrayInterno[i]) > 0) {
 				min = this.arrayInterno[i];
 			}
 		}

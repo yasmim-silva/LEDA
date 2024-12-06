@@ -47,5 +47,14 @@ public class TestVetor {
 		Vetor<Aluno> v = new Vetor<Aluno>(3);
 		v.inserir(aluno1);
 		v.inserir(aluno2);
+
+		ComparadorMaximo<Aluno> comparadorMaximo = new ComparadorMaximo<>();
+        ComparadorMinimo<Aluno> comparadorMinimo = new ComparadorMinimo<>();
+
+		v.setComparadorMaximo(comparadorMaximo);
+		v.setComparadorMinimo(comparadorMinimo);
+
+		assertEquals(aluno2, v.vetorMaximo());
+		assertEquals(aluno1, v.vetorMinimo());
 	}
 }
