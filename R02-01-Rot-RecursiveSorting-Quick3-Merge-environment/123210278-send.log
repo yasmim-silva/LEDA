@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2024-12-17T13:25:18.400-0300</date>
+  <logger>YASMIM DA SILVA RODRIGUES</logger>
+  <level>FINE</level>
+  <message>File 123210278-YASMIM DA SILVA RODRIGUES.zip was received. It was sent by YASMIM DA SILVA RODRIGUES from IP 172.22.32.1 at 17-12-2024 13*25*18</message>
+</record>
