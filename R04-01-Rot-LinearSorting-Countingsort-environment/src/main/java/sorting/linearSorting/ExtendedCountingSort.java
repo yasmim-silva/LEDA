@@ -19,10 +19,10 @@ public class ExtendedCountingSort extends AbstractSorting<Integer> {
 	}
 
 	private int[] calculaExtremos(Integer[] array, int leftIndex, int rightIndex) {
-		int maior = array[rightIndex];
+		int maior = array[leftIndex];
 		int menor = array[leftIndex];
 
-		for (int i = leftIndex + 1; i < rightIndex; i++) {
+		for (int i = leftIndex + 1; i <= rightIndex; i++) {
 			if (array[i] > maior) {
 				maior = array[i]; 
 			}
