@@ -15,14 +15,41 @@ public class FloorCeilBinarySearchImpl implements FloorCeil {
 
 	@Override
 	public Integer floor(Integer[] array, Integer x) {
-		// TODO implement your code here
-		throw new UnsupportedOperationException("Not implemented yet!");
+		return buscaBinariaFloor(array, 0, array.length - 1, x);
 	}
 
 	@Override
 	public Integer ceil(Integer[] array, Integer x) {
-		// TODO implement your code here
-		throw new UnsupportedOperationException("Not implemented yet!");
+		return buscaBinariaCeil(array, 0, array.length - 1, x);
 	}
 
+	private Integer buscaBinariaFloor(Integer[] array, Integer left, Integer right, Integer x) {
+		if (left > right) {
+			return null;
+		}
+		int mid = (left + right) / 2;
+		if (array[mid] <= x && array[mid+1] > x) {
+			return array[mid];
+		}
+		if (array[mid] < x) {
+			return buscaBinariaFloor(array, mid+1, right, x);
+		} else {
+			return buscaBinariaFloor(array, left, mid-1, x);
+		}
+	}
+
+	private Integer buscaBinariaCeil(Integer[] array, Integer left, Integer right, Integer x) {
+		if (left > right) {
+			return null;
+		}
+		int mid = (left + right) / 2;
+		if (array[mid] >= x && array[mid-1] < x) {
+			return array[mid];
+		}
+		if (array[mid] > x) {
+			return buscaBinariaCeil(array, left, mid-1, x);
+		} else {
+			return buscaBinariaCeil(array, mid+1, right, x);
+		}
+	}
 }
