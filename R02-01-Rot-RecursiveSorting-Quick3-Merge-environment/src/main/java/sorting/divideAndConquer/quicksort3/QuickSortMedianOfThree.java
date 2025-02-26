@@ -30,7 +30,7 @@ public class QuickSortMedianOfThree<T extends Comparable<T>> extends
 		}
 	}
 
-	public void medianaDeTres(T[] array, int leftIndex, int rightIndex, int mid) {
+	private void medianaDeTres(T[] array, int leftIndex, int rightIndex, int mid) {
 		if (array[leftIndex].compareTo(array[mid]) > 0) {
 			Util.swap(array, leftIndex, mid);
 		}
@@ -43,25 +43,16 @@ public class QuickSortMedianOfThree<T extends Comparable<T>> extends
 		Util.swap(array, mid, rightIndex - 1);
 	}
 
-	public int partition(T[] array, int leftIndex, int rightIndex) {
-        T pivot = array[rightIndex - 1];
-        int i = leftIndex;               
-        int j = rightIndex - 2;         
-
-        while (i <= j) {
-            while (array[i].compareTo(pivot) < 0) {
-                i++;
-            }
-            while (array[j].compareTo(pivot) > 0) {
-                j--;
-            }
-            if (i <= j) {
-                Util.swap(array, i, j);
-                i++;
-                j--;
-            }
-        }
-		Util.swap(array, i, rightIndex - 1);
+	private int partition(T[] array, int leftIndex, int rightIndex) {
+        T pivo = array[leftIndex];
+		int i = leftIndex;
+		for (int j = leftIndex + 1; j <= rightIndex; j++) {
+			if (array[j].compareTo(pivo) < 0) {
+				i++;
+				Util.swap(array, i, j);
+			}
+		}
+		Util.swap(array, leftIndex, i);
 		return i;
 	}
 }

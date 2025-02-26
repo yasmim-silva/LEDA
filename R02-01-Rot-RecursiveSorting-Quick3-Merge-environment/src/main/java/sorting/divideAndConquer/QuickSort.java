@@ -28,7 +28,7 @@ public class QuickSort<T extends Comparable<T>> extends AbstractSorting<T> {
 	public int partition(T[] array, int leftIndex, int rightIndex) {
 		T pivo = array[leftIndex];
 		int i = leftIndex;
-		for (int j = leftIndex + 1; j < array.length; j++) {
+		for (int j = leftIndex + 1; j <= rightIndex; j++) {
 			if (array[j].compareTo(pivo) < 0) {
 				i++;
 				Util.swap(array, i, j);
