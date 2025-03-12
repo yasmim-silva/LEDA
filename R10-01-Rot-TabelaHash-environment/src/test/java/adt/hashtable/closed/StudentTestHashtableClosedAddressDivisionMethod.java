@@ -68,7 +68,6 @@ public class StudentTestHashtableClosedAddressDivisionMethod {
 		// busca um elemento existente. compara a posicao
 		assertEquals(new Integer(305), table1.search(305));
 		assertEquals(2, table1.indexOf(305));
-
 	}
 
 	@Test
@@ -84,5 +83,16 @@ public class StudentTestHashtableClosedAddressDivisionMethod {
 	@Test
 	public void testSize() {
 		assertEquals(80, table1.size());
+	}
+
+	@Test
+	public void testSearchMy() {
+		// busca um elemento inexistente. compara a posicao
+		assertNull(table1.search(100));
+		assertEquals(-1, table1.indexOf(100));
+
+		// busca um elemento existente. compara a posicao
+		assertEquals(new Integer(305), table1.search(305));
+		assertEquals(2, table1.indexOf(305));
 	}
 }

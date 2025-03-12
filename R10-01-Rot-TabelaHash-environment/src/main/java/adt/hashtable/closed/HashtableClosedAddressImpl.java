@@ -96,7 +96,9 @@ public class HashtableClosedAddressImpl<T> extends
 		if(element != null) {
 			int i = indexOf(element);
 			if(i != -1) {
-				saida = element;
+				LinkedList<T> list = ((LinkedList<T>) table[i]);
+				int index = list.indexOf(element);
+				saida = list.get(index);
 			}
 		}
 		return saida;

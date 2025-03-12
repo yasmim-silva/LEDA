@@ -15,18 +15,16 @@ public class HashtableOpenAddressLinearProbingImpl<T extends Storable> extends
 
 	@Override
 	public void insert(T element) {
-		if(element != null) {
-			if(!isFull()) {
-				int probe = 0;
-				int i = ((HashFunctionLinearProbing) this.hashFunction).hash(element, probe);
-				while (table[i] != null && probe != this.capacity()) {
-					probe++;
-					this.COLLISIONS++;
-					i = ((HashFunctionLinearProbing) this.hashFunction).hash(element, probe);
-				}
-				table[i] = element;
-				this.elements++;
+		if(element != null && !isFull()) {
+			int probe = 0;
+			int index = ((HashFunctionLinearProbing) this.hashFunction).hash(element, probe);
+			while (table[index] != null && probe != this.capacity()) {
+				probe++;
+				this.COLLISIONS++;
+				index = ((HashFunctionLinearProbing) this.hashFunction).hash(element, probe);
 			}
+			table[index] = element;
+			this.elements++;
 		}
 	}
 
@@ -45,8 +43,13 @@ public class HashtableOpenAddressLinearProbingImpl<T extends Storable> extends
 	@Override
 	public int indexOf(T element) {
 		int index = -1;
-		if(element != null && !this.isEmpty()) {
-			
+		if(element != null) {
+			int probe = 0;
+			index = ((HashFunctionLinearProbing) this.hashFunction).hash(element, probe);
+			while (!table[index].equals(element) && probe != this.capacity()) {
+				probe++;
+				index = ((HashFunctionLinearProbing) this.hashFunction).hash(element, probe);
+			}
 		}
 		return index;
 	}
