@@ -15,8 +15,19 @@ public class HashtableOpenAddressLinearProbingImpl<T extends Storable> extends
 
 	@Override
 	public void insert(T element) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Not implemented yet!");
+		if(element != null) {
+			if(!isFull()) {
+				int probe = 0;
+				int i = ((HashFunctionLinearProbing) this.hashFunction).hash(element, probe);
+				while (table[i] != null && probe != this.capacity()) {
+					probe++;
+					this.COLLISIONS++;
+					i = ((HashFunctionLinearProbing) this.hashFunction).hash(element, probe);
+				}
+				table[i] = element;
+				this.elements++;
+			}
+		}
 	}
 
 	@Override
@@ -33,8 +44,11 @@ public class HashtableOpenAddressLinearProbingImpl<T extends Storable> extends
 
 	@Override
 	public int indexOf(T element) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Not implemented yet!");
+		int index = -1;
+		if(element != null && !this.isEmpty()) {
+			
+		}
+		return index;
 	}
 
 }
