@@ -1,5 +1,6 @@
 package orderStatistic;
 
+import java.util.Arrays;
 import java.util.PriorityQueue;
 
 public class OrderStatisticsHeapImpl<T extends Comparable<T>> implements OrderStatistics<T> {
@@ -18,11 +19,26 @@ public class OrderStatisticsHeapImpl<T extends Comparable<T>> implements OrderSt
 	
 	@Override
 	public T getOrderStatistics(T[] array, int k) {
-		PriorityQueue<T> heap = new PriorityQueue<T>();
-		//TODO IMplement your code here
-		throw new UnsupportedOperationException("Not implemented yet!");
+		T result;
+		if(array == null || k < 1 || k > array.length) {
+			result = null;
+		} else {
+			PriorityQueue<T> heap = new PriorityQueue<T>();
+			heap.addAll(Arrays.asList(array));
+			result = getOrderStatistics(heap, k);
+		}
+		return result;
 	}
 
-	
+	private T getOrderStatistics(PriorityQueue<T> heap, int k) {
+		T result;
+		if (k == 1) {
+			result = heap.poll();
+		} else {
+			heap.poll();
+			result = getOrderStatistics(heap, k - 1);
+		}
+		return result;
+	}
 	
 }

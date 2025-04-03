@@ -3,6 +3,7 @@ package adt.heap;
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 import java.util.Arrays;
@@ -11,17 +12,25 @@ import java.util.Comparator;
 import org.junit.Before;
 import org.junit.Test;
 
+import adt.heap.extended.FloorCeilHeap;
+import adt.heap.extended.FloorCeilHeapImpl;
+import orderStatistic.OrderStatisticsHeapImpl;
+
 public class StudentMinHeapTest {
 
 	Heap<Integer> heap;
+	OrderStatisticsHeapImpl<Integer> ordem;
+	FloorCeilHeapImpl teste;
 
 	@Before
 	public void setUp() {
 		// TODO Instancie seu comparator para fazer sua estrutura funcionar como
 		// uma min heap aqui. Use instanciacao anonima da interface
 		// Comparator!!!!
-		Comparator<Integer> comparator = Integer::compareTo;
+		Comparator<Integer> comparator = new ComparatorMaxHeap<>();
 		heap = new HeapImpl<Integer>(comparator);
+		ordem = new OrderStatisticsHeapImpl<>();
+		teste = new FloorCeilHeapImpl(comparator);
 	}
 
 	@Test
@@ -110,6 +119,44 @@ public class StudentMinHeapTest {
 		}
 
 		assertTrue(isHeap);
+	}
+
+
+	//Teste da classe OrderStatisticsHeapImpl
+	@Test
+	public void testStatistic() {
+		Integer[] array = {3, 5, 7, 2, 8};
+		assertEquals((Integer) 2, ordem.getOrderStatistics(array, 1)); // 1º menor
+        assertEquals((Integer) 3, ordem.getOrderStatistics(array, 2)); // 2º menor
+        assertEquals((Integer) 5, ordem.getOrderStatistics(array, 3)); // 3º menor
+        assertEquals((Integer) 7, ordem.getOrderStatistics(array, 4)); // 4º menor
+        assertEquals((Integer) 8, ordem.getOrderStatistics(array, 5)); // 5º menor
+		
+        assertNull(ordem.getOrderStatistics(array, 7)); // k maior que o tamanho
+        assertNull(ordem.getOrderStatistics(array, 0)); // k inválido
+        assertNull(ordem.getOrderStatistics(new Integer[]{}, 1)); // Array vazio
+	}
+
+
+	//Teste da classe FloorCeilHeapImpl
+	@Test
+	public void testFloorMinHeap() {
+		Integer[] array = {10, 12, 20, 21, 7, 11, 8};
+
+		assertEquals((Integer) 8, teste.floor(array, 9));
+		assertEquals((Integer) 12, teste.floor(array, 12));
+		assertEquals((Integer) 21, teste.floor(array, 25));
+		assertEquals(null, teste.floor(array, 6)); // Nenhum número menor ou igual a 6
+}
+
+	@Test
+	public void testCeilMinHeap() {
+		Integer[] array = {10, 12, 20, 21, 7, 11, 8};
+
+		assertEquals((Integer) 10, teste.ceil(array, 9));
+		assertEquals((Integer) 12, teste.ceil(array, 12));
+		assertEquals(null, teste.ceil(array, 22)); // Nenhum número maior ou igual a 22
+		assertEquals((Integer) 7, teste.ceil(array, 6)); // Menor valor da heap
 	}
 
 }

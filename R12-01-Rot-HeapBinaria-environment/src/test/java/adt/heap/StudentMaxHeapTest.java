@@ -3,6 +3,7 @@ package adt.heap;
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 import java.util.Arrays;
@@ -11,22 +12,23 @@ import java.util.Comparator;
 import org.junit.Before;
 import org.junit.Test;
 
+import adt.heap.extended.FloorCeilHeap;
+import adt.heap.extended.FloorCeilHeapImpl;
+import orderStatistic.OrderStatisticsHeapImpl;
+
 public class StudentMaxHeapTest {
 
 	Heap<Integer> heap;
+	OrderStatisticsHeapImpl<Integer> ordem;
 
 	@Before
 	public void setUp() {
 		// TODO Instancie seu comparator para fazer sua estrutura funcionar como
 		// uma max heap aqui. Use instanciacao anonima da interface
 		// Comparator!!!!
-		Comparator<Integer> comparator = new Comparator<Integer>() {
-			@Override
-			public int compare(Integer o1, Integer o2) {
-				return o2.compareTo(o1); // Inverte a ordem natural → Maior sobe
-			}
-		};
+		Comparator<Integer> comparator = new ComparatorMinHeap<>();
 		heap = new HeapImpl<Integer>(comparator);
+		ordem = new OrderStatisticsHeapImpl<>();
 	}
 
 	@Test
@@ -116,6 +118,22 @@ public class StudentMaxHeapTest {
 		}
 
 		assertTrue(isHeap);
+	}
+
+
+	//Teste da classe OrderStatisticsHeapImpl
+	@Test
+	public void testStatistic() {
+		Integer[] array = {3, 5, 7, 2, 8 };
+		assertEquals((Integer) 2, ordem.getOrderStatistics(array, 1)); // 1º menor
+        assertEquals((Integer) 3, ordem.getOrderStatistics(array, 2)); // 2º menor
+        assertEquals((Integer) 5, ordem.getOrderStatistics(array, 3)); // 3º menor
+        assertEquals((Integer) 7, ordem.getOrderStatistics(array, 4)); // 4º menor
+        assertEquals((Integer) 8, ordem.getOrderStatistics(array, 5)); // 5º menor
+        
+        assertNull(ordem.getOrderStatistics(array, 7)); // k maior que o tamanho
+        assertNull(ordem.getOrderStatistics(array, 0)); // k inválido
+        assertNull(ordem.getOrderStatistics(new Integer[]{}, 1)); // Array vazio
 	}
 
 }
