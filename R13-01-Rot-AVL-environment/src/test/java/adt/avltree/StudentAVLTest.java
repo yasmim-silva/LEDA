@@ -11,10 +11,12 @@ public class StudentAVLTest {
 
 	private AVLTree<Integer> avl;
 	private BSTNode<Integer> NIL = new BSTNode<Integer>();
+	private AVLTreeVerifierImpl<Integer> verifier;
 
 	@Before
 	public void setUp() {
 		avl = new AVLTreeImpl<>();
+		verifier = new AVLTreeVerifierImpl<>(avl);
 	}
 
 	@Test
@@ -68,5 +70,52 @@ public class StudentAVLTest {
 		avl.remove(55);
 		assertEquals(NIL, avl.getRoot());
 		assertTrue(avl.isEmpty());
+	}
+
+	// Testes da classe AVLTreeVerifierImpl
+	@Test
+	public void testIsAVLSimples() {
+		assertTrue(verifier.isAVLTree());
+
+		avl.insert(10);
+		assertTrue(verifier.isAVLTree());
+
+		avl.insert(5);
+		avl.insert(15);
+		assertTrue(verifier.isAVLTree());
+	}
+
+	@Test
+	public void testIsAVLComRotacoes() {
+		avl.insert(30);
+		avl.insert(20);
+		avl.insert(10); // LL
+		assertTrue(verifier.isAVLTree());
+
+		avl.insert(25);
+		avl.insert(28); // LR/RL
+		assertTrue(verifier.isAVLTree());
+
+		avl.insert(40);
+		avl.insert(50); // RR
+		assertTrue(verifier.isAVLTree());
+	}
+
+	@Test
+	public void testIsAVLComRemocao() {
+		avl.insert(50);
+		avl.insert(30);
+		avl.insert(70);
+		avl.insert(20);
+		avl.insert(40);
+		avl.insert(60);
+		avl.insert(80);
+
+		assertTrue(verifier.isAVLTree());
+
+		avl.remove(20);
+		avl.remove(70); 
+
+		assertTrue(verifier.isAVLTree());
 	}
 }
